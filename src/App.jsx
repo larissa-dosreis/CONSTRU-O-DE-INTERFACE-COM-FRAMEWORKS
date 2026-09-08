@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import "./App.css";
+
 const initialBooks = [
   {
     id: 1,
@@ -44,12 +45,18 @@ const initialBooks = [
     status: "Disponível",
   },
 ];
+
+const COVER_HUES = 6;
+
 function SearchControls({ query, onQueryChange, total, shown }) {
   return (
     <div className="controls">
       <label htmlFor="search">Buscar no catálogo</label>
       <div className="search-wrap">
-        <span>⌕</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="8" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" />
+        </svg>
         <input
           id="search"
           value={query}
@@ -63,15 +70,17 @@ function SearchControls({ query, onQueryChange, total, shown }) {
     </div>
   );
 }
+
 function BookCard({ book, onEdit, onDelete }) {
   const initials = book.title
     .split(" ")
     .slice(0, 2)
     .map((w) => w[0])
     .join("");
+  const hue = book.id % COVER_HUES;
   return (
     <article className="book-card">
-      <div className="book-cover">
+      <div className="book-cover" data-hue={hue}>
         <span>{initials}</span>
       </div>
       <div className="book-info">
@@ -83,12 +92,15 @@ function BookCard({ book, onEdit, onDelete }) {
         </div>
         <h3>{book.title}</h3>
         <p>{book.author}</p>
-        <button type="button" className="edit-btn" onClick={() => onEdit(book)}>Editar</button>
-        <button type="button" className="delete-btn" onClick={(event) => { event.preventDefault(); onDelete(book.id) }}>Remover</button>
+        <div className="card-actions">
+          <button type="button" className="edit-btn" onClick={() => onEdit(book)}>Editar</button>
+          <button type="button" className="delete-btn" onClick={(event) => { event.preventDefault(); onDelete(book.id) }}>Remover</button>
+        </div>
       </div>
     </article>
   );
 }
+
 function AddBookForm({ onAdd, editing, onUpdate, onCancel }) {
   const [form, setForm] = useState({
     title: "",
@@ -143,6 +155,8 @@ function AddBookForm({ onAdd, editing, onUpdate, onCancel }) {
           <option>História</option>
           <option>Ficção científica</option>
           <option>Infantojuvenil</option>
+          <option>Clássico</option>
+          <option>Literatura brasileira</option>
         </select>
       </div>
       <div>
@@ -158,6 +172,7 @@ function AddBookForm({ onAdd, editing, onUpdate, onCancel }) {
     </form>
   );
 }
+
 export default function App() {
   const [books, setBooks] = useState(initialBooks);
   const [query, setQuery] = useState("");
@@ -175,17 +190,17 @@ export default function App() {
   return (
     <main>
       <header>
-        <div className="brand-mark">L</div>
+        <div className="brand-mark" aria-label="Livro">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3a4e12" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+          </svg>
+        </div>
         <div>
           <p className="eyebrow">BIBLIOTECA DIGITAL</p>
           <h1>
             Catálogo<span>.</span>
           </h1>
-        </div>
-        <div className="header-note">
-          Painel interativo
-          <br />
-          <b>React + estado reativo</b>
         </div>
       </header>
       <section className="intro">
@@ -228,7 +243,7 @@ export default function App() {
         />
       </section>
       <footer>
-        <span>© 2024 Catálogo</span>
+        <span>© 2026 Catálogo</span>
         <span>Feito para leitores curiosos.</span>
       </footer>
       {editing && <div className="modal-backdrop"><div className="modal"><button className="close-modal" onClick={() => setEditing(null)}>×</button><p className="eyebrow">EDITAR LIVRO</p><h2>Atualizar cadastro</h2><AddBookForm editing={editing} onCancel={() => setEditing(null)} onUpdate={(book) => { setBooks(books.map((item) => item.id === book.id ? book : item)); setEditing(null) }} onAdd={() => {}} /></div></div>}

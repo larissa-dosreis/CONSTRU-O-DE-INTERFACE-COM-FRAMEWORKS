@@ -1,22 +1,55 @@
-:root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap');
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
+:root {
+  /* Paleta literária — modo claro */
+  --text: #5a5248;
+  --text-h: #1a1510;
+  --text-muted: #8a7f72;
+  --bg: #faf9f5;
+  --bg-card: #ffffff;
+  --border: #e4ddd3;
+  --border-strong: #c8bfb0;
+
+  /* Inputs — modo claro */
+  --input-bg: #ffffff;
+  --input-text: #1a1510;
+  --input-placeholder: #a09486;
+  --input-border: #d4ccc0;
+  --input-focus-border: #5c4a1e;
+  --input-focus-shadow: rgba(92, 74, 30, 0.12);
+
+  /* Accent literário */
+  --accent: #5c4a1e;
+  --accent-light: #8b6a2e;
+  --accent-bg: rgba(92, 74, 30, 0.08);
+  --accent-border: rgba(92, 74, 30, 0.35);
+
+  /* Status */
+  --status-available-bg: #eaf5e9;
+  --status-available-text: #2d6a4f;
+  --status-available-border: #b7dbb0;
+  --status-loaned-bg: #fdf0f0;
+  --status-loaned-text: #9b3a3a;
+  --status-loaned-border: #f0c0c0;
+  --status-reserved-bg: #fef9ec;
+  --status-reserved-text: #8a6000;
+  --status-reserved-border: #f0d882;
+
+  /* Utilitários */
+  --code-bg: #f3efe8;
+  --social-bg: rgba(244, 240, 232, 0.5);
+  --shadow-sm: 0 1px 3px rgba(26, 21, 16, 0.06), 0 1px 2px rgba(26, 21, 16, 0.04);
+  --shadow-md: 0 4px 16px rgba(26, 21, 16, 0.08), 0 2px 6px rgba(26, 21, 16, 0.04);
+  --shadow-lg: 0 12px 40px rgba(26, 21, 16, 0.12), 0 4px 12px rgba(26, 21, 16, 0.06);
+  --shadow: var(--shadow-md);
+
+  /* Tipografia */
+  --sans: 'Inter', system-ui, 'Segoe UI', sans-serif;
+  --heading: 'Playfair Display', Georgia, serif;
   --mono: ui-monospace, Consolas, monospace;
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
+  font: 16px/160% var(--sans);
+  letter-spacing: 0.15px;
   color-scheme: light dark;
   color: var(--text);
   background: var(--bg);
@@ -26,40 +59,64 @@
   -moz-osx-font-smoothing: grayscale;
 
   @media (max-width: 1024px) {
-    font-size: 16px;
+    font-size: 15px;
   }
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
+    /* Paleta literária — modo escuro */
+    --text: #b0a89c;
+    --text-h: #f0ece4;
+    --text-muted: #7a7068;
+    --bg: #141210;
+    --bg-card: #1e1b17;
+    --border: #2e2a24;
+    --border-strong: #403a30;
 
-  #social .button-icon {
-    filter: invert(1) brightness(2);
+    /* Inputs — modo escuro (corrigido) */
+    --input-bg: #242018;
+    --input-text: #f0ece4;
+    --input-placeholder: #6e6558;
+    --input-border: #3e3830;
+    --input-focus-border: #c4a45a;
+    --input-focus-shadow: rgba(196, 164, 90, 0.15);
+
+    /* Accent — modo escuro */
+    --accent: #c4a45a;
+    --accent-light: #d4b870;
+    --accent-bg: rgba(196, 164, 90, 0.1);
+    --accent-border: rgba(196, 164, 90, 0.35);
+
+    /* Status — modo escuro */
+    --status-available-bg: rgba(45, 106, 79, 0.18);
+    --status-available-text: #74c69d;
+    --status-available-border: rgba(116, 198, 157, 0.25);
+    --status-loaned-bg: rgba(155, 58, 58, 0.18);
+    --status-loaned-text: #f4a5a5;
+    --status-loaned-border: rgba(244, 165, 165, 0.25);
+    --status-reserved-bg: rgba(138, 96, 0, 0.18);
+    --status-reserved-text: #fcd34d;
+    --status-reserved-border: rgba(252, 211, 77, 0.25);
+
+    --code-bg: #1e1b17;
+    --social-bg: rgba(40, 36, 28, 0.5);
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.25), 0 1px 2px rgba(0, 0, 0, 0.15);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.35), 0 2px 6px rgba(0, 0, 0, 0.2);
+    --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.5), 0 4px 12px rgba(0, 0, 0, 0.3);
   }
 }
 
 body {
   margin: 0;
+  background: var(--bg);
 }
 
 #root {
-  width: 1126px;
+  width: 1180px;
   max-width: 100%;
   margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
+  text-align: left;
   min-height: 100svh;
   display: flex;
   flex-direction: column;
@@ -67,30 +124,33 @@ body {
 }
 
 h1,
-h2 {
+h2,
+h3 {
   font-family: var(--heading);
-  font-weight: 500;
   color: var(--text-h);
 }
 
 h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
+  font-size: 52px;
+  font-weight: 600;
+  letter-spacing: -1.5px;
+  margin: 0;
   @media (max-width: 1024px) {
     font-size: 36px;
-    margin: 20px 0;
   }
 }
+
 h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 120%;
+  letter-spacing: -0.3px;
   margin: 0 0 8px;
   @media (max-width: 1024px) {
-    font-size: 20px;
+    font-size: 18px;
   }
 }
+
 p {
   margin: 0;
 }
@@ -104,7 +164,7 @@ code,
 }
 
 code {
-  font-size: 15px;
+  font-size: 14px;
   line-height: 135%;
   padding: 4px 8px;
   background: var(--code-bg);
